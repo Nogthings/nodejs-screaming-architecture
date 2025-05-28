@@ -1,0 +1,56 @@
+{
+  "name": "nodejs-screaming-architecture",
+  "displayName": "Node.js Screaming Architecture Generator",
+  "description": "Generate Node.js projects with Screaming Architecture and DDD principles",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["nodejs", "express", "ddd", "architecture", "generator"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "nodejs-screaming-architecture.generateProject",
+        "title": "Generate Node.js Project (Screaming Architecture)",
+        "category": "Node.js SA"
+      },
+      {
+        "command": "nodejs-screaming-architecture.addDomain",
+        "title": "Add New Domain",
+        "category": "Node.js SA"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "nodejs-screaming-architecture.generateProject",
+          "group": "navigation",
+          "when": "explorerResourceIsFolder"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "nodejs-screaming-architecture.generateProject",
+          "when": "workspaceFolder"
+        },
+        {
+          "command": "nodejs-screaming-architecture.addDomain",
+          "when": "workspaceFolder"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  }
+}
