@@ -22,7 +22,7 @@ export abstract class BaseFileGenerator implements IFileGenerator {
     /**
      * Genera un archivo desde un template
      */
-    protected async generateFile(
+    public async generateFile(
         templateName: string, 
         outputPath: string, 
         data: TemplateData,

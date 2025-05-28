@@ -75,7 +75,7 @@ export class DomainGenerator extends BaseFileGenerator {
         await this.createDirectories(domainPath, directories);
     }
 
-    private async generateDomainFiles(
+    protected async generateDomainFiles(
         domain: string, 
         projectInfo: ProjectInfo, 
         domainPath: string

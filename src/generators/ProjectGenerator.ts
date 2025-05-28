@@ -490,7 +490,7 @@ Environment variables are managed through \`.env\` files:
 | \`NODE_ENV\` | Environment mode | \`development\` |
 | \`PORT\` | Server port | \`3000\` |
 | \`APP_NAME\` | Application name | \`${projectInfo.name}\` |
-${projectInfo.database !== 'none' ? this.getDatabaseEnvDocs(projectInfo.database) : ''}
+${projectInfo.database !== 'none' ? this.getDatabaseEnvDocs(projectInfo.database, projectInfo.name) : ''}
 
 ${projectInfo.database !== 'none' ? `## 🗄️ Database
 
@@ -946,29 +946,29 @@ DB_CHARSET=utf8mb4
         }
     }
 
-    private getDatabaseEnvDocs(database: string): string {
-        switch (database) {
-            case 'mongodb':
-                return `| \`MONGODB_URI\` | MongoDB connection string | \`mongodb://localhost:27017/dbname\` |
+private getDatabaseEnvDocs(database: string, projectName: string): string {  // <-- Agregar projectName como parámetro
+    switch (database) {
+        case 'mongodb':
+            return `| \`MONGODB_URI\` | MongoDB connection string | \`mongodb://localhost:27017/dbname\` |
 | \`MONGODB_USER\` | MongoDB username | \`\` |
 | \`MONGODB_PASSWORD\` | MongoDB password | \`\` |`;
-            case 'postgresql':
-                return `| \`DATABASE_URL\` | PostgreSQL connection string | \`postgresql://user:pass@localhost:5432/dbname\` |
+        case 'postgresql':
+            return `| \`DATABASE_URL\` | PostgreSQL connection string | \`postgresql://user:pass@localhost:5432/dbname\` |
 | \`DB_HOST\` | Database host | \`localhost\` |
 | \`DB_PORT\` | Database port | \`5432\` |
 | \`DB_NAME\` | Database name | \`${projectName}\` |
 | \`DB_USER\` | Database user | \`username\` |
 | \`DB_PASSWORD\` | Database password | \`password\` |`;
-            case 'mysql':
-                return `| \`DB_HOST\` | Database host | \`localhost\` |
+        case 'mysql':
+            return `| \`DB_HOST\` | Database host | \`localhost\` |
 | \`DB_PORT\` | Database port | \`3306\` |
 | \`DB_NAME\` | Database name | \`${projectName}\` |
 | \`DB_USER\` | Database user | \`username\` |
 | \`DB_PASSWORD\` | Database password | \`password\` |`;
-            default:
-                return '';
-        }
+        default:
+            return '';
     }
+}
 
     private getDatabaseSetupDocs(database: string, projectName: string): string {
         switch (database) {
