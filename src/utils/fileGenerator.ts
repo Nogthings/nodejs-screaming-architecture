@@ -164,17 +164,20 @@ out/`;
         }
     }
 
-    static async generateDomainTemplates(projectPath: string, domains: string[]): Promise<void> {
-        const srcPath = path.join(projectPath, 'src');
+    static async generateDomainTemplates(projectDir: string, domains: string[]): Promise<void> {
+        const srcPath = path.join(projectDir, 'src');
         
         console.log('Generating domain templates...');
+        console.log(`Source path: ${srcPath}`);
+        
         for (const domain of domains) {
             const domainPath = path.join(srcPath, domain);
-            console.log(`📁 Generating domain: ${domain}`);
+            console.log(`📁 Generating domain: ${domain} at ${domainPath}`);
             
             // Verificar que el directorio del dominio existe
             if (!fs.existsSync(domainPath)) {
                 console.error(`❌ Domain directory does not exist: ${domainPath}`);
+                console.error(`Available directories in src:`, fs.readdirSync(srcPath));
                 throw new Error(`Domain directory does not exist: ${domainPath}`);
             }
             
@@ -182,12 +185,15 @@ out/`;
         }
     }
 
-    static async generateConfigFiles(projectPath: string, projectInfo: ProjectInfo): Promise<void> {
-        const configDir = path.join(projectPath, 'config');
+    static async generateConfigFiles(projectDir: string, projectInfo: ProjectInfo): Promise<void> {
+        const configDir = path.join(projectDir, 'config');
+        
+        console.log(`Generating config files in: ${configDir}`);
         
         // Verificar que el directorio config existe
         if (!fs.existsSync(configDir)) {
             console.error(`❌ Config directory does not exist: ${configDir}`);
+            console.error(`Available directories in project:`, fs.readdirSync(projectDir));
             throw new Error(`Config directory does not exist: ${configDir}`);
         }
 
